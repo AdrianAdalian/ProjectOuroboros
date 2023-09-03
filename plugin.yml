@@ -7,3 +7,6 @@ authors:
 api-version: '1.20'
 load: STARTUP
 commands:
+    skills:
+        description: displays skills to player
+        usage: /skills

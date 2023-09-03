@@ -13,7 +13,7 @@ public class PlayerDataFileHolder
 {
 	private static Map<UUID, StatisticsManager> player_registry = new HashMap<>();
 
-	public static StatisticsManager getPlayerData(UUID uuid) throws FileNotFoundException 
+	public static StatisticsManager getPlayerData(UUID uuid) throws FileNotFoundException
 	{
 		if (player_registry.containsKey(uuid)) 
 		{

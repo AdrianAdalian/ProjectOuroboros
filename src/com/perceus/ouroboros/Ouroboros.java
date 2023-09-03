@@ -3,6 +3,9 @@ package com.perceus.ouroboros;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.perceus.ouroboros.listeners.GeneralEXPIntegradeListener;
+import com.perceus.ouroboros.listeners.OnJoinOnQuitListener;
+import com.perceus.ouroboros.listeners.SkillBoard;
 import com.perceus.ouroboros.utilities.PrintUtils;
 
 public class Ouroboros extends JavaPlugin
@@ -13,8 +16,12 @@ public class Ouroboros extends JavaPlugin
 	public void onEnable() 
 	{
 		instance = this;
+		instance.getCommand("skills").setExecutor(new OuroborosCommand());
+		
 		PrintUtils.Print("&aOuroboros, ONLINE.");
 		Bukkit.getPluginManager().registerEvents(new SkillBoard(), this);
+		Bukkit.getPluginManager().registerEvents(new OnJoinOnQuitListener(), this);
+		Bukkit.getPluginManager().registerEvents(new GeneralEXPIntegradeListener(), this);
 	}
 	
 	@Override
