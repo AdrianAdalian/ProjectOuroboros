@@ -1,7 +1,6 @@
 package com.perceus.ouroboros.playerdata;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -13,7 +12,7 @@ public class PlayerDataFileHolder
 {
 	private static Map<UUID, StatisticsManager> player_registry = new HashMap<>();
 
-	public static StatisticsManager getPlayerData(UUID uuid) throws FileNotFoundException
+	public static StatisticsManager getPlayerData(UUID uuid)
 	{
 		if (player_registry.containsKey(uuid)) 
 		{

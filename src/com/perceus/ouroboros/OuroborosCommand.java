@@ -1,6 +1,5 @@
 package com.perceus.ouroboros;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,10 +33,7 @@ public class OuroborosCommand implements CommandExecutor, TabCompleter
 		
 		if (args[0].equals("scoreboard")) 
 		{			
-			try
-			{
-				SkillBoard.setScoreboard(player);
-			} catch (FileNotFoundException e){e.printStackTrace();}
+			SkillBoard.setScoreboard(player);
 			Bukkit.getScheduler().runTaskLater(Ouroboros.instance, ()->{
 				player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 			}, 100);
@@ -58,20 +54,15 @@ public class OuroborosCommand implements CommandExecutor, TabCompleter
 				return false;
 			}
 			UUID uuid = player.getPlayer().getUniqueId();
-			try
-			{
-				PlayerDataFileHolder.getPlayerData(uuid).setGeneralEXP(0);
-				PlayerDataFileHolder.getPlayerData(uuid).setGeneralLevel(0);
-				PlayerDataFileHolder.getPlayerData(uuid).setKillEXP(0);
-				PlayerDataFileHolder.getPlayerData(uuid).setKillLevel(0);
-				PlayerDataFileHolder.getPlayerData(uuid).setMovementEXP(0);
-				PlayerDataFileHolder.getPlayerData(uuid).setMovementLevel(0);
-				PlayerDataFileHolder.getPlayerData(uuid).setSkillPoints(0);
-				
-			} catch (FileNotFoundException e)
-			{
-				e.printStackTrace();
-			}
+			PlayerDataFileHolder.getPlayerData(uuid).setGeneralEXP(0);
+			PlayerDataFileHolder.getPlayerData(uuid).setGeneralLevel(0);
+			PlayerDataFileHolder.getPlayerData(uuid).setKillEXP(0);
+			PlayerDataFileHolder.getPlayerData(uuid).setKillLevel(0);
+			PlayerDataFileHolder.getPlayerData(uuid).setMovementEXP(0);
+			PlayerDataFileHolder.getPlayerData(uuid).setMovementLevel(0);
+			PlayerDataFileHolder.getPlayerData(uuid).setSkillPoints(0);
+			SkillBoard.setScoreboard(player);
+			player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 			return true;
 		}
 		

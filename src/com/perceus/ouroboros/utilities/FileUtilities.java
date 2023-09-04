@@ -2,7 +2,6 @@ package com.perceus.ouroboros.utilities;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,13 +35,19 @@ public class FileUtilities
 	}
 	
 	public static <T> T fromFile(String path, Class<T> type) //reading from a new or existing file
-			throws FileNotFoundException
+
 	{
 		File file = new File(path);
 		
 		if (!file.exists()) 
 		{
-			throw new FileNotFoundException("File \"" + file.getName() + "\" doesn't exist");
+			try
+			{
+				file.createNewFile();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		
 		try (FileReader reader = new FileReader(file))

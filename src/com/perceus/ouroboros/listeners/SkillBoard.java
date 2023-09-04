@@ -1,7 +1,5 @@
 package com.perceus.ouroboros.listeners;
 
-import java.io.FileNotFoundException;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -18,7 +16,7 @@ import net.md_5.bungee.api.ChatColor;
 public class SkillBoard implements Listener
 {
 	
-	public static void setScoreboard(Player p) throws FileNotFoundException
+	public static void setScoreboard(Player p)
 	{
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = board.registerNewObjective("Player Stats", Criteria.DUMMY, p.getName() + PrintUtils.ColorParser("&r&f's Stats:"));
@@ -36,7 +34,7 @@ public class SkillBoard implements Listener
 		p.setScoreboard(board);
 	}
 	
-	public static void updateScoreboard(Player p) throws FileNotFoundException
+	public static void updateScoreboard(Player p)
 	{
 		Scoreboard board = p.getScoreboard();
 		Objective obj = board.getObjective(DisplaySlot.SIDEBAR);
