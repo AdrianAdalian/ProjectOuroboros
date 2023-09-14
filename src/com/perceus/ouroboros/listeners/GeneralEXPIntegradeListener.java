@@ -2,6 +2,7 @@ package com.perceus.ouroboros.listeners;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -17,7 +18,6 @@ public class GeneralEXPIntegradeListener implements Listener
 	public void onJoin(PlayerJoinEvent e) 
 	{
 		UUID uuid = e.getPlayer().getUniqueId();
-		long time = e.getPlayer().getWorld().getTime();
 		
 		new BukkitRunnable()
 		{
@@ -30,15 +30,15 @@ public class GeneralEXPIntegradeListener implements Listener
 				}
 				PlayerDataFileHolder.getPlayerData(uuid).setGeneralEXP(PlayerDataFileHolder.getPlayerData(uuid).getGeneralEXP() + 1);
 				
-				if (PlayerDataFileHolder.getPlayerData(uuid).getGeneralEXP() == 1000) 
+				if (PlayerDataFileHolder.getPlayerData(uuid).getGeneralEXP() >= 1000) 
 				{
 					PlayerDataFileHolder.getPlayerData(uuid).setGeneralEXP(0);
 					PlayerDataFileHolder.getPlayerData(uuid).setGeneralLevel(PlayerDataFileHolder.getPlayerData(uuid).getGeneralLevel() + 1);
 					PlayerDataFileHolder.getPlayerData(uuid).setSkillPoints(PlayerDataFileHolder.getPlayerData(uuid).getSkillPoints() +1);
 				}
 				SkillBoard.setScoreboard(e.getPlayer());
-				e.getPlayer().getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
+				Bukkit.getScheduler().runTaskLater(Ouroboros.instance, ()->e.getPlayer().getScoreboard().clearSlot(DisplaySlot.SIDEBAR), 60);
 			}
-		}.runTaskTimer(Ouroboros.instance, 1200, time);
+		}.runTaskTimer(Ouroboros.instance, 1200, 1200);
 	}
 }
